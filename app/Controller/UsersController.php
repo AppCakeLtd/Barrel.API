@@ -39,7 +39,7 @@
 		 	$conditions = array(
 		 		'conditions' => array(
 			 		'or' => array(
-			 			"User.username LIKE" => "%$usernameToSearchFor%"
+			 			"User.username" => "$usernameToSearchFor"
 			 		)
 			 	)
 		 	);
