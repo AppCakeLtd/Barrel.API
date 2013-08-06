@@ -49,4 +49,36 @@
 			$this->set('_serialize', array('results'));
 		 }
 	 }
+	 
+	 public function registerNewUser() {
+		 if ($this->request->is('post')) {
+			$userdata['username'] 	= $this->request->data['username'];
+			$userdata['password'] 	= $this->request->data['password'];
+			$userdata['email']	 	= $this->request->data['email'];
+			
+			if ($this->User->save($userdata)) {
+				$response = new UserGenericResponse();
+				$response->responseCode = 200;
+				$response->responseDescription = "OK";
+			}
+			else {
+				$response = new UserGenericResponse();
+				$response->responseCode = 500;
+				$response->responseDescription = "Error saving in the Database!";
+			}
+		 }
+		 else {
+			 $response = new UserGenericResponse();
+			 $response->responseCode = 501;
+			 $response->responseDescription = "No data was sent to the server!";
+		 }
+		 
+		 $this->set('results', $response);
+  		 $this->set('_serialize', array('results'));
+	 }
+ }
+ 
+ final class UserGenericResponse {
+	 public $responseCode;
+	 public $responseDescription;
  }
