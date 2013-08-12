@@ -37,6 +37,52 @@ class GamesController extends AppController {
 	   $this->set('allGames', $this->Game->find('all'));
 	   $this->set('_serialize', array('allGames'));
 	}
+	
+	public function saveGameIdentifier() {
+		if ($this->request->is('get')) {
+			// Get the current game identifiers before appending them
+			$conditions = array(
+				'conditions' => array(
+					'Game.id' => $this->request->query["gameID"]
+				)
+			);
+			
+			if ($currentGame = $this->Game->find('all', $conditions)) {
+				if (!preg_match("~\b" . $this->request->query["identifier"] . "\b~", $currentGame[0]["Game"]["identifiers"])) {
+					$game["identifiers"] = $currentGame[0]["Game"]["identifiers"] . ", " . $this->request->query["identifier"];
+					$game["id"] = $this->request->query["gameID"];
+					
+					if ($this->Game->save($game)) {
+						$response = new GameGenericResponse();
+	                	$response->gameID = $this->Game->id;
+	                	$response->responseCode = 200;
+	                	$response->responseDescription = "OK";
+					}
+					else {
+						$response = new GameGenericResponse();
+	                    $response->gameID = 0;
+	                    $response->responseCode = 500;
+	                    $response->responseDescription = "Error saving in the Database!";
+					}
+				}
+			}
+			else {
+				$response = new GameGenericResponse();
+                $response->gameID = 0;
+                $response->responseCode = 502;
+                $response->responseDescription = "Unable to get the current game!";
+			}
+		}
+		else {
+			$response = new GameGenericResponse();
+            $response->gameID = 0;
+            $response->responseCode = 504;
+            $response->responseDescription = "No data was sent to the server!";
+		}
+		
+		$this->set('results', $response);
+	    $this->set('_serialize', array('results'));
+	}
 	 
 	public function searchForGame() {
 		if ($this->request->is('get')) {
