@@ -24,3 +24,7 @@ app/tmp/logs/empty
 app/tmp/logs/error.log
 app/tmp/sessions/empty
 app/tmp/tests/empty
+engines
+app/webroot/recipes
+app/webroot/artwork
+app/tmp
