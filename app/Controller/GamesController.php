@@ -39,6 +39,8 @@ class GamesController extends AppController {
 	}
 	
 	public function saveGameIdentifier() {
+		$results = "";
+	
 		if ($this->request->is('get')) {
 			// Get the current game identifiers before appending them
 			$conditions = array(
@@ -64,6 +66,12 @@ class GamesController extends AppController {
 	                    $response->responseCode = 500;
 	                    $response->responseDescription = "Error saving in the Database!";
 					}
+				}
+				else {
+					$response = new GameGenericResponse();
+	                $response->gameID = 0;
+	                $response->responseCode = 505;
+	                $response->responseDescription = "Identifier already exists";
 				}
 			}
 			else {
