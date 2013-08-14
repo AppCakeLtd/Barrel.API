@@ -68,8 +68,8 @@ class Debugger {
 			'escapeContext' => true,
 		),
 		'html' => array(
-			'trace' => '<pre class="cake-error trace"><b>Trace</b> <p>{:trace}</p></pre>',
-			'context' => '<pre class="cake-error context"><b>Context</b> <p>{:context}</p></pre>',
+			'trace' => '<pre class="cake-error alert trace"><b>Trace</b> <p>{:trace}</p></pre>',
+			'context' => '<pre class="cake-error alert context"><b>Context</b> <p>{:context}</p></pre>',
 			'escapeContext' => true,
 		),
 		'txt' => array(
@@ -106,7 +106,7 @@ class Debugger {
 			define('E_RECOVERABLE_ERROR', 4096);
 		}
 
-		$e = '<pre class="cake-error">';
+		$e = '<pre class="cake-error alert">';
 		$e .= '<a href="javascript:void(0);" onclick="document.getElementById(\'{:id}-trace\')';
 		$e .= '.style.display = (document.getElementById(\'{:id}-trace\').style.display == ';
 		$e .= '\'none\' ? \'\' : \'none\');"><b>{:error}</b> ({:code})</a>: {:description} ';
@@ -140,7 +140,7 @@ class Debugger {
 		$this->_templates['js']['code'] = '<pre id="{:id}-code" class="cake-code-dump" ';
 		$this->_templates['js']['code'] .= 'style="display: none;">{:code}</pre>';
 
-		$e = '<pre class="cake-error"><b>{:error}</b> ({:code}) : {:description} ';
+		$e = '<pre class="cake-error alert"><b>{:error}</b> ({:code}) : {:description} ';
 		$e .= '[<b>{:path}</b>, line <b>{:line}]</b></pre>';
 		$this->_templates['html']['error'] = $e;
 
