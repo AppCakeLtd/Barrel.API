@@ -210,6 +210,16 @@ class GamesController extends AppController {
         $this->set('results', $response);
         $this->set('_serialize', array('results'));
     }
+    
+    public function database() {
+    	$queryParams = array(
+	        'order' => array(
+	        	'Game.id DESC'
+	        )
+	    );
+    
+	    $this->set('allGames', $this->Game->find('all', $queryParams));
+    }
 }
  
 final class GameGenericResponse {
