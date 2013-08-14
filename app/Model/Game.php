@@ -26,5 +26,11 @@
  */
  
  class Game extends AppModel {
+ 	public $belongsTo = array(
+        'Users' => array(
+            'className' => 'User',
+            'foreignKey' => 'userID'
+        )
+    );
 	 var $useTable = "Games";
  }
