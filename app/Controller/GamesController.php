@@ -215,7 +215,8 @@ class GamesController extends AppController {
     	$queryParams = array(
 	        'order' => array(
 	        	'Game.id DESC'
-	        )
+	        ),
+	        'limit' => 10
 	    );
     
 	    $this->set('allGames', $this->Game->find('all', $queryParams));
