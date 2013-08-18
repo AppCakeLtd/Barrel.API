@@ -46,7 +46,7 @@
 <!-- Database entries start -->
 <?php
 foreach($allGames as $game) { ?>
-<div class="span12 thumbs clearfix" id="entries">
+<div class="span12 thumbs clearfix entries">
 	<ul class="thumbnails">
 		<li class="span12">
 			<div class="thumbnail">
@@ -55,7 +55,7 @@ foreach($allGames as $game) { ?>
 				</div>
 				<h3><?php echo $game["Game"]["name"]; ?></h3>
 				<h5><small>Author: <?php echo $game["Users"]["username"]; ?></small></h5>
-				<p><?php echo $game["Game"]["description"]; ?></p>
+				<p><?php echo nl2br(h($game["Game"]["description"])); ?></p>
 			</div>
 		</li>
 	</ul>
