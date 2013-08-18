@@ -116,9 +116,11 @@ div.thumbnail {
 
 .thumbnail > p {
 	float: right;
-	font: 1.2em/1.4em Helvetica, Arial, sans-serif;
+	font: 1.0em/1.5em Helvetica, Arial, sans-serif;
 	padding-right: 1%;
 	width: 86%;
+	margin-top: 10px;
+    max-height: 96px;
 }
 
 .thumbnail > .thumb-holder > img {
@@ -188,6 +190,10 @@ div.thumbnail {
 	div.macbook {
 		width: 100%;
 	}
+}
+
+.thumbnail h5 {
+    margin-top: -9px;
 }
 
 /* BOOTSTRAP OVERRIDES */
