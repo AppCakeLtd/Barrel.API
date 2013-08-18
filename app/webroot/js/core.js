@@ -13,12 +13,23 @@
 		init: function() {
 			var base = this;
 			base.$navbar = $('.navbar');
+			base.$context = $('body');
+			base.$content = base.$context.find('.content');
 			
 			base.attachEvents();
+			if (base.helpers.onPage('/Games/Database')) {
+    			base.prepareGameDB();
+			}
 		},
 		
 		attachEvents: function() {
 			
+		},
+		
+		prepareGameDB: function() {
+            var base = this;
+		
+    		base.$content.find('.thumbnail > p').ellipsis();
 		},
 		
 		scrollTo: function(el, speed, offset) {
@@ -33,5 +44,11 @@
 				scrollTop: el.offset().top - offset
 			}, speed);
 		}
+	},
+	
+	Barrel.core.helpers = {
+    	onPage: function(page) {
+        	return window.location.href.indexOf(page) > -1;
+    	}
 	}
 }(jQuery));
