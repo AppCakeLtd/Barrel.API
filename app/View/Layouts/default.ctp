@@ -53,20 +53,6 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
       <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/ico/apple-touch-icon-72-precomposed.png">
                     <link rel="apple-touch-icon-precomposed" href="/ico/apple-touch-icon-57-precomposed.png">
                                    <link rel="shortcut icon" href="/ico/favicon.png">
-                                   
-	  <script type="text/javascript">
-
-		  var _gaq = _gaq || [];
-		  _gaq.push(['_setAccount', 'UA-42006641-1']);
-		  _gaq.push(['_trackPageview']);
-		
-		  (function() {
-		    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-		    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-		    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-		  })();
-		
-		</script>
 </head>
 <body>
 	<div class="navbar navbar-inverse navbar-fixed-top">
@@ -115,6 +101,7 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="/js/jquery.js"></script>
     <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/jquery.plugins/jquery.autoellipsis.min.js"></script>
     <script src="/js/core.js"></script>
 </body>
 </html>
