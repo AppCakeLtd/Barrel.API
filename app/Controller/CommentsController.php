@@ -25,6 +25,65 @@
  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
  
- class CommentsController extends AppController {
+App::uses('ConnectionManager', 'Model');
+ 
+class CommentsController extends AppController {
+	public $components = array('RequestHandler');
 	 
- }
+    public function addNewComment() {
+        if ($this->request->is('post')) {
+        	$db = ConnectionManager::getDataSource('default');
+        	
+        	// Check the database, if this user has already written a review
+        	// If he has, return a non fatal error to Barrel
+        	$conditions = array(
+				'conditions' => array(
+					'and' => array(
+						'Comment.gameID' => $this->request->data["gameID"],
+						'Comment.userID' => $this->request->data["userID"]
+					)
+				)
+			);
+			
+			$commentsFound = $this->Comment->find('all', $conditions);
+			if (sizeof($commentsFound) == 0) {
+        	
+	            $newComment["title"] = $this->request->data["title"];
+	            $newComment["comment"] = $this->request->data["comment"];
+	            $newComment["gameID"] = $this->request->data["gameID"];
+	            $newComment["userID"] = $this->request->data["userID"];
+	            $newComment["rating"] = $this->request->data["rating"];
+	            $newComment["postDate"] = $db->expression('NOW()');
+	            
+	            if ($this->Comment->save($newComment)) {
+	                $response = new CommentGenericResponse();
+	            	$response->responseCode = 200;
+	            	$response->responseDescription = "OK";
+	            }
+	            else {
+	                $response = new CommentGenericResponse();
+	            	$response->responseCode = 500;
+	            	$response->responseDescription = "Error saving in the Database";
+	            }
+	        }
+	        else {
+		        $response = new CommentGenericResponse();
+            	$response->responseCode = 204;
+            	$response->responseDescription = "You have already written a review on this game.";
+	        }
+        }
+        else {
+            $response = new CommentGenericResponse();
+        	$response->responseCode = 504;
+        	$response->responseDescription = "No data was sent to the server!";
+        }
+        
+        $this->set('results', $response);
+        $this->set('_serialize', array('results'));
+    }
+}
+ 
+final class CommentGenericResponse {
+   public $responseCode;
+   public $responseDescription;
+}
