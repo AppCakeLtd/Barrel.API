@@ -101,7 +101,7 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="/js/jquery.js"></script>
     <script src="/js/bootstrap.min.js"></script>
-    <script src="/js/jquery.plugins/jquery.autoellipsis.min.js"></script>
+    <script src="/js/jquery.plugins/jquery.autoellipsis.js"></script>
     <script src="/js/core.js"></script>
 </body>
 </html>

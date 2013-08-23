@@ -54,7 +54,7 @@ foreach($allGames as $game) { ?>
 					<img src="<?php echo $game["Game"]["coverArtURL"]; ?>" alt="<?php echo $game["Game"]["name"] . " Cover Art"; ?>" class="img-rounded" />
 				</div>
 				<h3><?php echo $game["Game"]["name"]; ?></h3>
-				<h5><small>Author: <?php echo $game["Users"]["username"]; ?></small></h5>
+				<h5><small>ported by <?php echo $game["Users"]["username"]; ?></small></h5>
 				<p><?php echo nl2br(h($game["Game"]["description"])); ?></p>
 			</div>
 		</li>
