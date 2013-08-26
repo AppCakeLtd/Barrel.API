@@ -25,16 +25,22 @@
  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
  
- class WineBuildsController extends AppController {
+class WineBuildsController extends AppController {
  	
- 	public $components = array('RequestHandler');
+    public $components = array('RequestHandler');
  	
- 	public function index() {
+    public function index() {
 	 	
- 	}
+    }
  
-	public function getAllWineBuilds() {
-		$this->set('wineBuilds', $this->WineBuild->find('all'));
-		$this->set('_serialize', array('wineBuilds'));
-	}
- }
+    public function getAllWineBuilds() {
+        $queryParams = array(
+	        'order' => array(
+	        	'WineBuild.dateCreated DESC'
+	        )
+        );
+	   
+        $this->set('wineBuilds', $this->WineBuild->find('all', $queryParams));
+        $this->set('_serialize', array('wineBuilds'));
+    }
+}
