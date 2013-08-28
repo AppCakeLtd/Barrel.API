@@ -212,12 +212,27 @@ class GamesController extends AppController {
     }
     
     public function database() {
-    	$queryParams = array(
-	        'order' => array(
-	        	'Game.id DESC'
-	        ),
-	        'limit' => 10
-	    );
+    	if ($this->request->params['pass'] && $this->request->params['pass'][0] != 'Latest') {
+	    	$queryParams = array(
+		        'order' => array(
+		        	'Game.name ASC'
+		        ),
+		        'conditions' => array(
+		        	'or' => array(
+		        		'Game.name LIKE' => $this->request->params['pass'][0] . '%'
+		        	)
+		        ),
+		        'limit' => 10
+		    );
+    	}
+    	else {
+	    	$queryParams = array(
+		        'order' => array(
+		        	'Game.id DESC'
+		        ),
+		        'limit' => 10
+		    );
+		}
     
 	    $this->set('allGames', $this->Game->find('all', $queryParams));
     }
