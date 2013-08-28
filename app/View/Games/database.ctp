@@ -27,17 +27,17 @@
 ?>
 <div class="btn-toolbar">
 	<div class="btn-group btn-group-center">
-		<button class="btn active">Latest</button>
+		<a class="btn active" data-letter="Latest" href="/Games/Database/Latest">Latest</a>
 		<?php
 			foreach(range('a','z') as $i) {
-				echo '<button class="btn btn-narrow">' . $i . '</button>';
+				echo '<a class="btn btn-narrow" data-letter="' . $i . '" href="/Games/Database/' . $i . '">' . $i . '</a>';
 			}
 		?>
 	</div>
 	<div class="btn-group btn-group-center">
 		<?php
 			for($i=0; $i<10; $i++) {
-				echo '<button class="btn btn-narrow">' . $i . '</button>';
+				echo '<a class="btn btn-narrow" data-letter="' . $i . '" href="/Games/Database/' . $i . '">' . $i . '</a>';
 			}
 		?>
 	</div>
