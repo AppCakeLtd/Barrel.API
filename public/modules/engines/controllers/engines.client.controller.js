@@ -1,22 +1,57 @@
 'use strict';
 
-angular.module('engines').controller('EnginesController', ['$scope', '$stateParams', '$location', 'Authentication', 'Engines',
-    function($scope, $stateParams, $location, Authentication, Engines) {
+angular.module('engines').controller('EnginesController', ['$scope', '$stateParams', '$location', '$upload', 'Authentication', 'Engines',
+    function($scope, $stateParams, $location, $upload, Authentication, Engines) {
         $scope.authentication = Authentication;
+
+        $scope.$watch('files', function(files) {
+            if (files && files.length) {
+                $scope.onFileSelect(files);
+            }
+        });
 
         $scope.create = function() {
             var engine = new Engines({
-                title: this.title,
-                content: this.content
+                name: this.name,
+                path: this.uploadedEnginePath
             });
             engine.$save(function(response) {
                 $location.path('engines/' + response._id);
 
-                $scope.title = '';
-                $scope.content = '';
+                $scope.name = '';
+                $scope.uploadedEnginePath = '';
             }, function(errorResponse) {
                 $scope.error = errorResponse.data.message;
             });
+        };
+
+        $scope.onFileSelect = function(files, event) {
+            if (files && files.length) {
+                var engineFile = files;
+                if (angular.isArray(engineFile)) {
+                    engineFile = engineFile[0];
+                }
+
+                // if (engineFile.type !== '')
+
+                $scope.uploadInProgress = true;
+                $scope.uploadProgress = 0;
+
+                $scope.upload = $upload.upload({
+                    url: '/engines/upload',
+                    method: 'POST',
+                    file: engineFile
+                })/*.progress(function(event) {
+                    $scope.uploadProgress = Math.floor(event.loaded / event.total);
+                    $scope.$apply();
+                })*/.success(function(data, status, headers, config) {
+                    $scope.uploadInProgress = false;
+                    $scope.uploadedEnginePath = JSON.parse(data);
+                }).error(function(err) {
+                    $scope.uploadInProgress = false;
+                    console.log('Error uploading file: ' + err.message || err);
+                });
+            }
         };
 
         $scope.remove = function(engine) {
@@ -54,5 +89,9 @@ angular.module('engines').controller('EnginesController', ['$scope', '$statePara
                 engineId: $stateParams.engineId
             });
         };
+
+        $scope.$watch('files', function() {
+
+        });
     }
 ]);

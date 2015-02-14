@@ -12,16 +12,13 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="control-label" for="content">Content</label>
+                    <label class="control-label" for="content">Engine Upload</label>
                     <div class="controls">
-                        <div ng-file-drop ng-model="files" class="drop-box" drag-over-class="dragover" ng-multiple="true" allow-dir="true" accept=".zip">
-                            Drop engine archive here
-                            <div>or click to select</div>
-                        </div>
+                        <div class="btn btn-default" ng-model="files" ng-file-select ng-accept="'*.zip'">Select File</div>
                     </div>
                 </div>
                 <div class="form-group">
-                    <input type="submit" class="btn btn-default">
+                    <input type="submit" class="btn btn-info">
                 </div>
                 <div data-ng-show="error" class="text-danger">
                     <strong data-ng-bind="error"></strong>

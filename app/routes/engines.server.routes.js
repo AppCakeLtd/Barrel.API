@@ -17,6 +17,9 @@ module.exports = function(app) {
         .put(users.requiresLogin, engines.hasAuthorization, engines.update)
         .delete(users.requiresLogin, engines.hasAuthorization, engines.delete);
 
+    app.route('/engines/upload')
+        .post(engines.uploadEngine);
+
     // Finish by binding the article middleware
     app.param('engineId', engines.engineByID);
 };
