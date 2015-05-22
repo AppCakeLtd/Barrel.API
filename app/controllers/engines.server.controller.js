@@ -40,7 +40,8 @@ exports.uploadEngine = function(req, res) {
 
         // UUID to generate unique filenames
         var filename = file.originalFilename;
-        var destPath = process.cwd() + '/engines/' + filename;
+        var destPath = process.cwd() + '/public/engineFiles/' + filename;
+        var returnPath = '/engineFiles/' + filename;
 
         fs.rename(tmpPath, destPath, function(err) {
             if (err) {
@@ -48,7 +49,7 @@ exports.uploadEngine = function(req, res) {
                     message: errorHandler.getErrorMessage(err)
                 });
             } else {
-                res.json(destPath);
+                res.json(returnPath);
             }
         });
     });
