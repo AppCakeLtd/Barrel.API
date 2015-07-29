@@ -3,3 +3,4 @@ node_modules/
 bower_components/react
 bower_components
 less/semantic-ui/output
+public
